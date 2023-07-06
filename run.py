@@ -53,8 +53,7 @@ class LitMNIST(L.LightningModule):
 
     def forward(self, x):
         x = self.model(x)
-        # return F.log_softmax(x, dim=1)
-        return x
+        return F.log_softmax(x, dim=1)
 
     def training_step(self, batch, batch_idx):
         x, y = batch
@@ -87,6 +86,11 @@ class LitMNIST(L.LightningModule):
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
         return optimizer
+
+    def prepare_data(self):
+        # download
+        MNIST(self.data_dir, train=True, download=True)
+        MNIST(self.data_dir, train=False, download=True)
 
     def setup(self, stage=None):
         # Assign train/val datasets for use in dataloaders

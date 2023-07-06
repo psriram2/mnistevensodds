@@ -1,7 +1,7 @@
 
 # MNIST Evens/Odds Classifier
 
-
+Final Test Accuracy: **99.50000047683716**
 
 ## Installation
 
@@ -27,7 +27,7 @@ Then, download all package requirements with
 To train and test the model, please use the `--train` and `--test` arguments with `run.py`: 
 
 ```bash
-  python run.py --dataset ./data/ --train --test
+  python run.py --data_dir ./data/ --train --test
 ```
 
 If testing with a pretrained checkpoint, be sure to specify a checkpoint path with the argument `--checkpoint`. Other config options can be seen in `run.py`. 
