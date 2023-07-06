@@ -1,3 +1,4 @@
+# source code adapted from https://github.com/pytorch/vision/blob/main/torchvision/datasets/mnist.py
 import codecs
 import os
 import os.path
