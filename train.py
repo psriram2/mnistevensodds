@@ -11,7 +11,9 @@ from torch.nn import functional as F
 from torch.utils.data import DataLoader, random_split
 from torchmetrics import Accuracy
 from torchvision import transforms
-from torchvision.datasets import MNIST
+# from torchvision.datasets import MNIST
+from datasets.MNIST import MNIST
+
 
 from models.simple_cnn import Net
 
@@ -27,6 +29,7 @@ np.random.seed(0)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 BATCH_SIZE = 128 if torch.cuda.is_available() else 64
+NUM_CLASSES = 2
 
 # define a transforms for preparing the dataset
 transform = transforms.Compose([
@@ -53,7 +56,7 @@ class LitMNIST(L.LightningModule):
         self.learning_rate = learning_rate
 
         # Hardcode some dataset specific attributes
-        self.num_classes = 10
+        self.num_classes = NUM_CLASSES
         self.dims = (1, 28, 28)
         channels, width, height = self.dims
         self.transform = transforms.Compose(
@@ -75,10 +78,10 @@ class LitMNIST(L.LightningModule):
         #     nn.Linear(hidden_size, self.num_classes),
         # )
 
-        self.model = Net()
+        self.model = Net(NUM_CLASSES)
 
-        self.val_accuracy = Accuracy(task="multiclass", num_classes=10)
-        self.test_accuracy = Accuracy(task="multiclass", num_classes=10)
+        self.val_accuracy = Accuracy(task="multiclass", num_classes=NUM_CLASSES)
+        self.test_accuracy = Accuracy(task="multiclass", num_classes=NUM_CLASSES)
 
     def forward(self, x):
         x = self.model(x)
@@ -123,8 +126,9 @@ class LitMNIST(L.LightningModule):
 
     def prepare_data(self):
         # download
-        MNIST(self.data_dir, train=True, download=True)
-        MNIST(self.data_dir, train=False, download=True)
+        # MNIST(self.data_dir, train=True, download=True)
+        # MNIST(self.data_dir, train=False, download=True)
+        return
 
     def setup(self, stage=None):
         # Assign train/val datasets for use in dataloaders

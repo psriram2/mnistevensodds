@@ -3,7 +3,7 @@ from torch.nn import functional as F
 import torch
 
 class Net(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes):
         super(Net, self).__init__()
 
         # define a conv layer with output channels as 16, kernel size of 3 and stride of 1
@@ -45,7 +45,7 @@ class Net(nn.Module):
         self.fc23 = nn.Linear(256, 128)
         self.fc24 = nn.Linear(256, 128)
 
-        self.fc33 = nn.Linear(128*4,10)
+        self.fc33 = nn.Linear(128*4,num_classes)
         #self.fc33 = nn.Linear(64*3,10)
 
 
