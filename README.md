@@ -41,4 +41,4 @@ To run inference on a single image, please run
 
 ## Acknowledgements
 
- - https://jimut123.github.io/ for providing a simple but well perfoming CNN architecture for MNIST
+ - https://jimut123.github.io/ for providing a simple but well performing CNN architecture for MNIST
